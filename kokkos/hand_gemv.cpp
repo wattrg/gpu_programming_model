@@ -88,6 +88,8 @@ int main( int argc, char* argv[] )
     });
   }
 
+  Kokkos::fence();
+
   // Calculate time.
   double time = timer.seconds();
 
@@ -99,8 +101,8 @@ int main( int argc, char* argv[] )
   double Gbytes = 1.0e-9 * double( sizeof(double) * ( M + M * N + N ) );
 
   // Print results (problem size, time and bandwidth in GB/s).
-  printf( "N( %d ) M( %d ) nrepeat ( %d ) problem( %g MB ) time( %g us ) bandwidth( %g GB/s )\n",
-          N, M, nrepeat, Gbytes * 1000, time / nrepeat * 1e6, Gbytes * nrepeat / time );
+  printf( "N( %d ) M( %d ) nrepeat ( %d ) problem( %g MB ) time( %g ms ) bandwidth( %g GB/s )\n",
+          N, M, nrepeat, Gbytes * 1000, time / nrepeat * 1e3, Gbytes * nrepeat / time );
 
   }
   Kokkos::finalize();

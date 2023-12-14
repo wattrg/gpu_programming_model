@@ -25,7 +25,9 @@ function bench_matrix_multiply_hand!(A, x, result)
 end
 
 function matrix_multiply_blas!(A, x, result)
-    return A*x
+    CUDA.@sync begin
+	result = A*x
+    end
 end
 
 N = 4096
